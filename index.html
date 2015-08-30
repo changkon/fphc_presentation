@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Chang Kon Han - FPHC Presentation</title>
+	<!-- Reference stylesheets -->
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="plugin/highlight/styles/zenburn.css">
+</head>
+<body>
+	<!-- Wrap the entire slide show in a div using the "reveal" class -->
+	<div class="reveal">
+		<!-- Wrap all slides in a single "slides" class -->
+		<div class="slides">
+			<!-- ALL SLIDES GO HERE -->
+			<!-- Each section element contains an individual slide -->
+			<section>
+				<h1>Chang Kon Han</h1>
+				<p>University and Personal projects</p>
+			</section>
+
+			<section>
+				<h1>Outline</h1>
+				<ul>
+					<li>Robot Soccer</li>
+					<li>VAMIX</li>
+					<li>Test Drive</li>
+				</ul>
+			</section>
+
+			<!-- Robot soccer nested section -->
+			<section>
+				<section>
+					<h1>Robot Soccer</h1>
+					<ul>
+						<li>Controlling robots to play soccer</li>
+						<li>Personal project along with 2 of my friends</li>
+						<li>Competition held at UoA, run by ECE department</li>
+						<li><a href="https://github.com/WesleyYep/robotSoccer" target="_blank">https://github.com/WesleyYep/robotSoccer</a></li>
+					</ul>
+				</section>
+				<section>
+					<h1>BLAZE</h1>
+					<p>We won the competition last year. Decided to try create our own software</p>
+					<p>Ongoing project. Supervised by Dr Ho Seok Ahn</p>
+					<p>Implemented in <strong>Java</strong></p>
+				</section>
+				<section>
+					<h1>What do we use</h1>
+					<ul>
+						<li>OpenCV for Java</li>
+						<li>Gradle</li>
+						<li>jFuzzyLogic</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Vision system</h2>
+					<img src="image/vision.png" alt="GUI for vision settings" id="vision-image"/>
+					<p>Uses OpenCV to capture webcam images and finds robot location through image segmentation(binary)</p>
+				</section>
+				<section>
+					<h1>Control system</h1>
+					<p>Using a mixture of PID and Fuzzy Logic</p>
+					<pre><code data-trim contenteditable class="java">FunctionBlock fb = loadFuzzy("fuzzy/goalKeeper.fcl");
+fb.setVariable("targetTheta", targetTheta);
+fb.setVariable("targetDist", targetDist);
+fb.evaluate();
+fb.getVariable("linearVelocity").defuzzify();
+fb.getVariable("angularVelocity").defuzzify();
+r.linearVelocity = fb.getVariable("linearVelocity").getValue();
+r.angularVelocity = fb.getVariable("angularVelocity").getValue();</code></pre>
+				</section>
+				<section>
+					<h1>Strategy system</h1>
+					<ul>
+						<li>
+						Goalkeeper
+						<ul>
+							<li>Predict movement</li>
+
+						</ul>
+						</li>
+						<li>Defender</li>
+						<li>
+						Attacker
+						<ul>
+							<li>Waiting striker</li>
+						</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Simulation Demo</h1>
+				</section>
+			</section>
+
+			<!-- VAMIX -->
+			<section>
+				<section>
+					<h1>VAMIX</h1>
+					<ul>
+						<li>SE206 project</li>
+						<li>Video and Audio mixer program</li>
+						<li>Implemented in Java and used in Linux</li>
+						<li>Lecturers were our clients</li>
+						<li><a href="https://github.com/changkon/VAMIX" target="_blank">https://github.com/changkon/VAMIX</a></li>
+					</ul>
+				</section>
+				<section>
+					<h1>Target audience</h1>
+					<p>Young adults - wanting to use an easy and simple video/audio editing software</p>
+				</section>
+				<section>
+					<h1>Features</h1>
+					<ul>
+						<li>Download audio from internet</li>
+						<li>Play media files</li>
+						<li>Extract audio from media file</li>
+						<li>Replace audio to a video file</li>
+						<li>Overlay audio to a video file</li>
+						<li>Change volume in a video file</li>
+						<li>Add additional audio tracks to a video file</li>
+						<li>Drawing text to a video</li>
+						<li>Adding fade in or fade out effects to a video</li>
+						<li>Edit subtitles and add subtitles to a video</li>
+					</ul>
+				</section>
+				<section>
+					<h2>GUI</h2>
+					<img src="image/vamix_gui.png" alt="vamix gui during startup" id="vamix-gui"/>
+				</section>
+				<section>
+					<h2>Fullscreen</h2>
+					<img src="image/vamix_fullscreen.png" alt="vamix in fullscreen mode" id="vamix-fullscreen"/>
+					<p>Control panel implemented using FSM and mouse listeners</p>
+				</section>
+				<section>
+					<h1>Linux avconv library</h1>
+					<pre><code class="java">StringBuilder command = new StringBuilder();
+command.append("avplay -i \'" + inputFile + "\' ");
+command.append("-ss " + data[0] + " -vf ");
+command.append("drawtext=\"fontfile=" + data[3]);
+command.append(": fontsize=" + data[4]);
+command.append(": fontcolor=" + data[5]);
+command.append(": x=" + data[6]);
+command.append(": y=" + data[7]);
+command.append(": text=\'" + data[2] + "\': draw=\'lt(t," + MediaTimer.getSeconds(data[1].toString()) + ")\'\"");
+
+ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", command.toString());
+builder.redirectErrorStream(true);
+Process process = builder.start();</code></pre>
+				</section>
+			</section>
+
+			<!-- Test Drive -->
+			<section>
+				<section>
+					<h1>Test Drive</h1>
+					<ul>
+						<li>SE306 project</li>
+						<li>Team size of 8</li>
+						<li>Implemented in C++ using ROS and used in Linux</li>
+						<li><a href="https://github.com/gdsl/SOFTENG-306-PROJECT-1" target="_blank">https://github.com/gdsl/SOFTENG-306-PROJECT-1</a></li>
+					</ul>
+				</section>
+				<section>
+					<h1>What did we use</h1>
+					<ul>
+						<li>ROS</li>
+						<li>CMake</li>
+						<li>Google Test</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Objectives</h1>
+					<p>Simulating robots in orchard picking kiwi fruits</p>
+				</section>
+				<section>
+					<h1>Features</h1>
+					<ul>
+						<li>Orchard</li>
+						<li>
+						Robots
+						<ul>
+							<li>Picker</li>
+							<li>Carrier</li>
+						</ul>
+						</li>
+						<li>
+						Animals
+						<ul>
+							<li>Dogs</li>
+							<li>Cats</li>
+						</ul>
+						<li>
+						Humans
+						<ul>
+							<li>Workers</li>
+							<li>Gardeners</li>
+							<li>Bystanders</li>
+						</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>GUI</h2>
+					<img src="image/td_gui.png" alt="test drive gui" id="td-gui">
+				</section>
+				<section>
+					<h2>Stage</h2>
+					<img src="image/td_stage.png" alt="test drive stage" id="td-stage">
+				</section>
+				<section>
+					<h2>Stage</h2>
+					<img src="image/td_stage_perspective.png" alt="test drive perspective view" id="td-stage-perspective">
+				</section>
+				<section>
+					<h1>Movement</h1>
+					<ul>
+						<li>Moves in x and y directions</li>
+						<li>Uses queue system</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Obstacle avoidance</h2>
+					<img src="image/td_obstacle_avoidance.png" alt="test drive obstacle avoidance" id="td-obstacle-avoidance">
+					<p>Uses information from laser sensors</p>
+				</section>
+			</section>
+
+			<!-- Questions -->
+			<section>
+				<h1>Questions?</h1>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- Load javascript references -->
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// Required, even if empty
+		Reveal.initialize({
+			dependencies: [
+				// Syntax highlighting
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+</html>
